@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 // SweetAlert 2
 import Swal from 'sweetalert2';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../app.redurcer';
+import { AppState } from '../../app.reducer';
 import { Subscription } from 'rxjs';
 import * as ui from "../../shared/ui.actions";
 

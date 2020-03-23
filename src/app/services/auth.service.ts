@@ -3,19 +3,26 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import 'firebase/firestore';
 import { AngularFirestore } from '@angular/fire/firestore';
 
-import { AppState } from '../app.redurcer';
+import { AppState } from '../app.reducer';
 import { Store } from '@ngrx/store';
 import * as authActions from '../auth/auth.actions';
 
 import { map } from 'rxjs/operators'
 import { Usuario } from '../models/usuario.model';
 import { Subscription } from 'rxjs';
+import * as ingresoEgresoActions from "../ingreso-egreso/ingreso-egreso.actions";
 @Injectable({
   providedIn: "root"
 })
 export class AuthService {
 
   userSubscription: Subscription;
+  private _user: Usuario;
+
+  get user(){
+    return this._user;
+  }
+
   constructor(
                 private auth: AngularFireAuth,
                 private firestore: AngularFirestore,
@@ -32,14 +39,20 @@ export class AuthService {
                                     .subscribe( (firestoreUser:any) =>{
                                       // console.log(firestoreUser);
                                       const user = Usuario.fromFirebase( firestoreUser);
+                                      this._user = user;
                                       this.store.dispatch(authActions.setUser({ user }));
+                                      
                                     })
               
       }else{
         // no existe
         // console.log('Llamar unSetUser');
+        this._user = null;
         this.userSubscription.unsubscribe();
          this.store.dispatch(authActions.unSetUser());
+         this.store.dispatch( ingresoEgresoActions.unSetItems() );
+           // cada vez que el estado de firebase cambie va purgar los items
+          
       }
       
       

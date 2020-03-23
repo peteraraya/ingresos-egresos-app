@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 // NGrx
-import { AppState } from '../../app.redurcer';
+import { AppState } from '../../app.reducer';
 import { Store } from '@ngrx/store';
 import * as ui from '../../shared/ui.actions';
 
