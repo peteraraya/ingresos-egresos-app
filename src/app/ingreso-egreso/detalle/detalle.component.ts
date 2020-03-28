@@ -7,6 +7,7 @@ import { IngresoEgreso } from "../../models/ingreso-egreso.model";
 import { Subscription } from "rxjs";
 import { IngresoEgresoService } from "../../services/ingreso-egreso.service";
 import Swal from "sweetalert2";
+import { AppStateWithIngreso } from '../ingreso-egreso.reducer';
 
 @Component({
   selector: "app-detalle",
@@ -18,13 +19,13 @@ export class DetalleComponent implements OnInit, OnDestroy {
   ingresosSubs: Subscription;
 
   constructor(
-    private store: Store<AppState>,
-    private ingresoEgresoService: IngresoEgresoService,
+    private store: Store<AppStateWithIngreso>,
+    private ingresoEgresoService: IngresoEgresoService
   ) {}
 
   ngOnInit() {
     this.ingresosSubs = this.store
-      .select("ingresosEgresos")
+      .select('ingresosEgresos')
       .subscribe(({ items }) => (this.ingresosEgresos = items));
   }
   ngOnDestroy() {
@@ -32,9 +33,11 @@ export class DetalleComponent implements OnInit, OnDestroy {
   }
 
   borrar(uid: string) {
-    this.ingresoEgresoService.borrarIngresoEgreso(uid)
-        .then(() => Swal.fire('Boorado','Item Borrado','success'))
-        .catch( err => { Swal.fire('Error',err.message,'error')})
-   
+    this.ingresoEgresoService
+      .borrarIngresoEgreso(uid)
+      .then(() => Swal.fire("Boorado", "Item Borrado", "success"))
+      .catch(err => {
+        Swal.fire("Error", err.message, "error");
+      });
   }
 }

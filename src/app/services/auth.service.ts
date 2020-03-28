@@ -48,8 +48,8 @@ export class AuthService {
         // no existe
         // console.log('Llamar unSetUser');
         this._user = null;
-        this.userSubscription.unsubscribe();
-         this.store.dispatch(authActions.unSetUser());
+       this.userSubscription?.unsubscribe();
+        this.store.dispatch( authActions.unSetUser() );
          this.store.dispatch( ingresoEgresoActions.unSetItems() );
            // cada vez que el estado de firebase cambie va purgar los items
           
