@@ -30,7 +30,7 @@ import { ingresoEgresoReducer } from './ingreso-egreso.reducer';
   ],
   imports: [
     CommonModule,
-    StoreModule.forFeature('ingresoEgresos', ingresoEgresoReducer),
+    StoreModule.forFeature('ingresosEgresos', ingresoEgresoReducer),
     ReactiveFormsModule,
     ChartsModule,
     SharedModule,

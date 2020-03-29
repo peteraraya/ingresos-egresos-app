@@ -20,7 +20,7 @@ export class DetalleComponent implements OnInit, OnDestroy {
 
   constructor(
     private store: Store<AppStateWithIngreso>,
-    private ingresoEgresoService: IngresoEgresoService
+    private ingresoEgresoService: IngresoEgresoService,
   ) {}
 
   ngOnInit() {
@@ -33,11 +33,9 @@ export class DetalleComponent implements OnInit, OnDestroy {
   }
 
   borrar(uid: string) {
-    this.ingresoEgresoService
-      .borrarIngresoEgreso(uid)
-      .then(() => Swal.fire("Boorado", "Item Borrado", "success"))
-      .catch(err => {
-        Swal.fire("Error", err.message, "error");
-      });
+    this.ingresoEgresoService.borrarIngresoEgreso(uid)
+        .then(() => Swal.fire('Boorado','Item Borrado','success'))
+        .catch( err => { Swal.fire('Error',err.message,'error')})
+   
   }
 }

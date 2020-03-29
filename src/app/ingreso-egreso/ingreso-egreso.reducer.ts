@@ -7,7 +7,6 @@ export interface State {
   items: IngresoEgreso[];
 }
 
-
 export interface AppStateWithIngreso extends AppState {
   ingresosEgresos: State;
 }
